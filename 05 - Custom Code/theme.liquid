@@ -1,0 +1,3816 @@
+<!doctype html>
+<html class="no-js " lang="{{ shop.locale }}">
+  <head>
+<meta name="p:domain_verify" content="686e710ee28f9d86fe635f0bf43a86e3"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XC2BPX52YS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XC2BPX52YS');
+</script>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_header_bg }}">
+    <link rel="preconnect" href="//cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.shopify.com">
+    <link rel="preconnect" href="//fonts.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.shopify.com">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {% if current_tags %}
+        {% assign meta_tags = current_tags | join: ', ' %}
+        &ndash;
+        {{ 'general.meta.tags' | t: tags: meta_tags }}
+      {% endif %}
+      {% if current_page != 1 %}
+        &ndash;
+        {{ 'general.meta.page' | t: page: current_page }}
+      {% endif %}
+      {% unless page_title contains shop.name %}
+        &ndash;
+        {{ shop.name }}
+      {% endunless %}
+    </title>
+   
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+      {% else %}
+      <meta name="description" content="{{ settings.meta_description | escape }}">
+    {%- endif -%}
+    
+    {%- render 'social-meta-tags' -%}
+    {%- render 'header-css' -%}
+      <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    {{ content_for_header }}
+    <style>
+  /* GLOBAL OVERFLOW FIX 
+     This forces the browser to cut off anything that spills 
+     outside the screen width, preventing horizontal scrolling.
+  */
+  html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative; 
+  }
+
+  /* OPTIONAL: Fix specific responsive containers if they are the culprits
+     (Bootstrap/Grid systems often cause this with negative margins)
+  */
+  .page-container, .main-content, #PageContainer {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+</style>
+
+<script>
+  // JAVASCRIPT BACKUP
+  // This calculates the viewport width and ensures the body never exceeds it.
+  (function() {
+    function lockWidth() {
+  if (!document.body || !document.documentElement) return;
+
+  var w = document.documentElement.clientWidth || window.innerWidth;
+
+  document.body.style.maxWidth = w + 'px';
+  document.documentElement.style.overflowX = 'hidden';
+  document.body.style.overflowX = 'hidden';
+}
+    
+    // Run on load and on resize
+    window.addEventListener('load', lockWidth);
+    window.addEventListener('resize', lockWidth);
+    lockWidth(); // Run immediately
+  })();
+</script>
+
+
+  </head>
+  <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} body-theme {% if settings.productpage == 'product-2' or settings.productpage == 'product-6' or settings.productpage == 'product-7' %} product-hide-breadcrumb {% endif %}">
+   {% assign lazy = false %}
+    <img {% if lazy %} loading = "lazy" {% endif %} width="99998" height="99999" alt="index" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 98vw; height: 99vh; max-width: 98vw; max-height: 99vh;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+">
+    {%- render 'loading' -%}
+    {%- section 'announcement-bar-slide' -%}
+    {%- section 'header' -%}
+    {%- section 'store-messages' -%}
+    <div class="page-container page-element is-moved-by-drawer">
+      {%- render 'breadcrumb' -%}
+      <main class="main-content" id="MainContent" role="main">
+        {%- if settings.enable_animationscroll -%}
+          <div id="js-scroll">
+          {% endif %}
+          {%- if settings.enable_animationscroll -%}
+            <div data-scroll-section>
+            {% endif %}
+            {%- render 'slideshow' -%}
+            {%- if settings.enable_animationscroll -%}
+            </div>
+          {% endif %}
+          {{ content_for_layout }}
+          {%- if settings.enable_animationscroll -%}
+          </div>
+        {% endif %}
+      </main>
+
+     {%- liquid
+      section 'banner-footer'
+      section 'newsletter-footer'
+      section 'footer'
+      if template == 'index' or request.design_mode
+      section 'pnewsletter'
+      endif
+      section 'product-suggest'
+      section 'cookie-policy'
+      section 'custom-color'
+     -%}
+    </div>
+    {%- liquid
+      render 'back-to-top' 
+      render 'menu-mobile' 
+      render 'bottom-contents' 
+      render 'quickview' 
+      render 'popup-compare' 
+      render 'header-js' 
+    -%}
+
+
+    <!-- K2 Sphere - Remove invalid Bridey coupon block only -->
+<style>
+  .k2-bridey-hidden {
+    display: none !important;
+  }
+
+  /* Fix Save button hover black-on-black issue */
+  .cart button:hover,
+  .cart input[type="submit"]:hover,
+  .cart__footer button:hover,
+  .cart__footer input[type="submit"]:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+  }
+</style>
+
+<script>
+(function () {
+  function hideBrideyCouponBlock() {
+    var all = Array.from(document.querySelectorAll('div, section, form'));
+
+    all.forEach(function (el) {
+      if (
+        el === document.body ||
+        el === document.documentElement ||
+        el.closest('.header') ||
+        el.closest('header')
+      ) {
+        return;
+      }
+
+      var text = (el.innerText || '').toLowerCase();
+
+      if (
+        text.includes('list coupon') &&
+        text.includes('bridey') &&
+        text.includes('coupon code will work on checkout page')
+      ) {
+        var childrenWithSameText = Array.from(el.children).filter(function (child) {
+          var childText = (child.innerText || '').toLowerCase();
+
+          return (
+            childText.includes('list coupon') &&
+            childText.includes('bridey') &&
+            childText.includes('coupon code will work on checkout page')
+          );
+        });
+
+        if (childrenWithSameText.length === 0) {
+          el.classList.add('k2-bridey-hidden');
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', hideBrideyCouponBlock);
+  window.addEventListener('load', hideBrideyCouponBlock);
+  setTimeout(hideBrideyCouponBlock, 500);
+  setTimeout(hideBrideyCouponBlock, 1500);
+})();
+</script>
+<script>
+document.addEventListener('click', function (event) {
+  const link = event.target.closest('a');
+
+  if (!link) return;
+
+  const linkText = link.textContent.trim().toLowerCase();
+
+  if (linkText === 'read privacy' || linkText.includes('read privacy')) {
+    event.preventDefault();
+    window.location.href = 'https://k2-sphere.com/policies/privacy-policy';
+  }
+});
+</script>
+<style>
+/* K2 Sphere - Sidecart View Cart + Checkout Hover Fix */
+
+/* Disable animated overlay only for sidecart bottom buttons */
+.mini-cart-btns > a.js-cart-btn-cart::before,
+.mini-cart-btns > a.js-cart-btn-cart:hover::before,
+.mini-cart-btns > a.js-cart-btn-cart::after,
+.mini-cart-btns > a.js-cart-btn-cart:hover::after,
+.mini-cart-btns > a.js-cart-btn-checkout::before,
+.mini-cart-btns > a.js-cart-btn-checkout:hover::before,
+.mini-cart-btns > a.js-cart-btn-checkout::after,
+.mini-cart-btns > a.js-cart-btn-checkout:hover::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: none !important;
+}
+
+/* View Cart: white background, black text */
+.mini-cart-btns > a.js-cart-btn-cart,
+.mini-cart-btns > a.js-cart-btn-cart:hover,
+.mini-cart-btns > a.js-cart-btn-cart:focus {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border: 1px solid #000000 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Checkout: black background, white text */
+.mini-cart-btns > a.js-cart-btn-checkout,
+.mini-cart-btns > a.js-cart-btn-checkout:hover,
+.mini-cart-btns > a.js-cart-btn-checkout:focus {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #000000 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force direct text visibility */
+.mini-cart-btns > a.js-cart-btn-cart,
+.mini-cart-btns > a.js-cart-btn-checkout {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-indent: 0 !important;
+  letter-spacing: 0.5px !important;
+}
+</style>
+<script>
+/* K2 Sphere - Restore Sidecart You May Also Like Products */
+(function () {
+  function formatMoney(cents) {
+    if (!cents) return '';
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  function restoreSidecartRecommendations() {
+    var heading = Array.from(document.querySelectorAll('*')).find(function (el) {
+      return el.textContent && el.textContent.trim() === 'You may also like';
+    });
+
+    if (!heading) return;
+
+    var existingBox = document.querySelector('#k2-sidecart-recommendations-restore');
+if (existingBox) existingBox.remove();
+
+if (window.k2SidecartRecommendationsLoading) return;
+window.k2SidecartRecommendationsLoading = true;
+
+    fetch('/cart.js')
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        var item = cart.items && cart.items[0];
+        if (!item || !item.product_id) return;
+
+        return fetch('/recommendations/products.json?product_id=' + item.product_id + '&limit=6');
+      })
+      .then(function (r) {
+        if (!r) return null;
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data || !data.products || !data.products.length) return;
+
+        var box = document.createElement('div');
+        box.id = 'k2-sidecart-recommendations-restore';
+        box.style.cssText = 'display:block;padding:14px 0 4px;border-bottom:1px solid #eee;';
+        function getSidecartRecommendationImage(product) {
+  var image = '';
+
+  if (product.featured_image) {
+    image = product.featured_image;
+  } else if (product.images && product.images.length) {
+    image = product.images[0];
+  }
+
+  if (!image) return '';
+
+  if (typeof image === 'object') {
+    image = image.src || image.url || '';
+  }
+
+  if (!image) return '';
+
+  if (image.indexOf('//') === 0) {
+    image = 'https:' + image;
+  }
+
+  return image;
+}
+  
+
+   
+
+
+
+
+var shownProducts = [];
+var uniqueProducts = data.products.filter(function (product) {
+  var key = product.handle || product.id || product.title;
+
+  if (!key || shownProducts.indexOf(key) !== -1) {
+    return false;
+  }
+
+  shownProducts.push(key);
+  return true;
+}).slice(0, 3);
+
+uniqueProducts.forEach(function (product) {
+  var img = getSidecartRecommendationImage(product);
+
+
+  var price = formatMoney(product.price);
+
+          box.innerHTML +=
+            '<a href="' + product.url + '" style="display:flex;gap:12px;align-items:center;margin-bottom:14px;text-decoration:none;color:inherit;">' +
+              (img ? '<img src="' + img + '" style="width:70px;height:90px;object-fit:cover;">' : '') +
+              '<div style="flex:1;">' +
+                '<div style="font-weight:600;font-size:13px;text-transform:uppercase;color:#000;line-height:18px;">' +
+                  product.title +
+                '</div>' +
+                '<div style="font-size:13px;color:#000;margin-top:4px;">' +
+                  price +
+                '</div>' +
+              '</div>' +
+            '</a>';
+        });
+
+        heading.insertAdjacentElement('afterend', box);
+window.k2SidecartRecommendationsLoading = false;
+})
+.catch(function () {
+  window.k2SidecartRecommendationsLoading = false;
+});
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(restoreSidecartRecommendations, 800);
+  });
+
+  document.addEventListener('click', function () {
+    setTimeout(restoreSidecartRecommendations, 800);
+    setTimeout(restoreSidecartRecommendations, 1500);
+  });
+
+  document.addEventListener('cart:updated', function () {
+    setTimeout(restoreSidecartRecommendations, 800);
+  });
+})();
+</script>
+<style>
+/* K2 Sphere - Hide Sidecart Coupon Option */
+.block-coupon,
+[title="Coupon"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+</style>
+<style>
+/* K2 Sphere - Shipping Calculate Button Hover Text Fix */
+html body button.get-rates.btn.btn-theme,
+html body button.get-rates.btn.btn-theme:hover,
+html body button.get-rates.btn.btn-theme:focus,
+html body button.get-rates.btn.btn-theme:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #111111 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-indent: 0 !important;
+}
+
+/* Force inner text to stay white */
+html body button.get-rates.btn.btn-theme *,
+html body button.get-rates.btn.btn-theme:hover *,
+html body button.get-rates.btn.btn-theme:focus *,
+html body button.get-rates.btn.btn-theme:active * {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove theme hover overlay */
+html body button.get-rates.btn.btn-theme::before,
+html body button.get-rates.btn.btn-theme::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: none !important;
+}
+</style>
+<style>
+/* K2 Sphere - Order Note Save Button Hover Text Fix */
+html body button.cart-notes-submit.btn.btn-theme,
+html body button.cart-notes-submit.btn.btn-theme:hover,
+html body button.cart-notes-submit.btn.btn-theme:focus,
+html body button.cart-notes-submit.btn.btn-theme:active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #111111 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-indent: 0 !important;
+}
+
+/* Force inner text to stay white */
+html body button.cart-notes-submit.btn.btn-theme *,
+html body button.cart-notes-submit.btn.btn-theme:hover *,
+html body button.cart-notes-submit.btn.btn-theme:focus *,
+html body button.cart-notes-submit.btn.btn-theme:active * {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove theme hover overlay */
+html body button.cart-notes-submit.btn.btn-theme::before,
+html body button.cart-notes-submit.btn.btn-theme::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: none !important;
+}
+</style>
+<script>
+document.addEventListener('click', function (event) {
+  const saveButton = event.target.closest(
+    '.cart-note button[type="submit"], .cart-note .btn, button[name="save"], button[data-save-note], .btn-save-note, .js-save-note'
+  );
+
+  if (!saveButton) return;
+
+  setTimeout(function () {
+    document.body.classList.remove('modal-open', 'overflow-hidden', 'drawer-open', 'open-note');
+
+    document.querySelectorAll('.modal-backdrop, .drawer-backdrop, .overlay, .cart-note-overlay, .cart-note-popup, .note-popup').forEach(function (el) {
+      el.classList.remove('active', 'open', 'show');
+      el.style.opacity = '';
+      el.style.visibility = '';
+      el.style.pointerEvents = '';
+    });
+  }, 700);
+});
+</script>
+<script>
+(function () {
+  function fixMiniCartAfterNoteSave() {
+    setTimeout(function () {
+      document.querySelectorAll(
+        '.mini-cart-content, .js-mini-cart-content, .mini-cart, .cart-draw, .cart-drawer'
+      ).forEach(function (el) {
+        el.classList.remove('overlay', 'is-overlay', 'active-overlay', 'loading', 'disabled');
+        el.style.opacity = '1';
+        el.style.filter = 'none';
+        el.style.pointerEvents = 'auto';
+      });
+
+      document.body.classList.remove(
+        'modal-open',
+        'overflow-hidden',
+        'drawer-open',
+        'overlay',
+        'is-overlay'
+      );
+
+      document.querySelectorAll('.js-mini-cart-content, .mini-cart-content').forEach(function (cartContent) {
+        cartContent.scrollTop = 0;
+      });
+    }, 500);
+  }
+
+  document.addEventListener('click', function (event) {
+    const clickedSave =
+      event.target.matches('button, .btn, a') &&
+      event.target.textContent.trim().toLowerCase() === 'save';
+
+    const insideMiniCart = event.target.closest(
+      '.mini-cart, .mini-cart-content, .js-mini-cart-content, .cart-draw, .cart-drawer'
+    );
+
+    if (!clickedSave || !insideMiniCart) return;
+
+    fixMiniCartAfterNoteSave();
+    setTimeout(fixMiniCartAfterNoteSave, 1000);
+  });
+})();
+</script>
+<style>
+  /* K2 Sphere - Mobile Sidecart Calculate Shipping Button Fix */
+  @media screen and (max-width: 749px) {
+    p[data-k2-shipping-row="true"] {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 12px !important;
+    }
+
+    p[data-k2-shipping-row="true"] button.get-rates.btn.btn-theme {
+      width: 100% !important;
+      max-width: 100% !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-align: center !important;
+    }
+
+    p[data-k2-shipping-row="true"] button.link {
+      align-self: center !important;
+      margin-top: 2px !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function fixK2ShippingButton() {
+      document.querySelectorAll('button.get-rates.btn.btn-theme').forEach(function (button) {
+        var row = button.closest('p.field.mt-4.text-left.d-flex.gap-3');
+
+        if (row) {
+          row.setAttribute('data-k2-shipping-row', 'true');
+        }
+      });
+    }
+
+    fixK2ShippingButton();
+
+    var observer = new MutationObserver(function () {
+      fixK2ShippingButton();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+</script>
+<script type="text/javascript" id="">var _a,vfP=null!==(_a=document.getElementById("vfHolder"))&&void 0!==_a?_a:document.head,vfS=document.createElement("script");vfS.setAttribute("src","https://d1o5e9vlirdalo.cloudfront.net/vfLoader.js");vfS.setAttribute("id","vfLoader");vfS.setAttribute("data-pk",encodeURIComponent("k2sphere"));vfS.setAttribute("data-e",encodeURIComponent("prod"));vfS.type="text/javascript";vfP&&vfP.appendChild(vfS);</script>
+
+{% if request.path == '/pages/k2-sphere-creator-application' or request.path == '/pages/k2-sphere-creator-application-1' %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const signatureObservers = new WeakMap();
+
+
+  function setImportant(element, property, value) {
+    if (!element) return;
+
+    element.style.setProperty(
+      property,
+      value,
+      'important'
+    );
+  }
+
+
+  /* =========================================================
+     SIGNATURE
+     ========================================================= */
+
+  function lockSignatureCanvas(canvas) {
+
+    setImportant(canvas, 'width', '500px');
+    setImportant(canvas, 'max-width', '100%');
+
+    setImportant(canvas, 'height', '200px');
+    setImportant(canvas, 'min-height', '200px');
+    setImportant(canvas, 'max-height', '200px');
+
+    setImportant(canvas, 'display', 'block');
+    setImportant(canvas, 'margin', '0');
+    setImportant(canvas, 'padding', '0');
+
+    setImportant(
+      canvas,
+      'border',
+      '1px solid #dddddd'
+    );
+
+    setImportant(
+      canvas,
+      'border-radius',
+      '5px'
+    );
+
+    setImportant(
+      canvas,
+      'box-shadow',
+      'none'
+    );
+
+    setImportant(
+      canvas,
+      'background',
+      '#ffffff'
+    );
+
+
+    const signatureField =
+      canvas.closest('.signature-field');
+
+
+    if (signatureField) {
+
+      setImportant(
+        signatureField,
+        'width',
+        '500px'
+      );
+
+      setImportant(
+        signatureField,
+        'max-width',
+        '100%'
+      );
+
+      setImportant(
+        signatureField,
+        'border',
+        '0'
+      );
+
+      setImportant(
+        signatureField,
+        'outline',
+        '0'
+      );
+
+      setImportant(
+        signatureField,
+        'box-shadow',
+        'none'
+      );
+
+      setImportant(
+        signatureField,
+        'background',
+        'transparent'
+      );
+
+      setImportant(
+        signatureField,
+        'padding',
+        '0'
+      );
+
+      setImportant(
+        signatureField,
+        'margin',
+        '0'
+      );
+
+
+      const inputWrapper =
+        signatureField.closest('.form-field_input');
+
+
+      if (inputWrapper) {
+
+        setImportant(
+          inputWrapper,
+          'width',
+          '500px'
+        );
+
+        setImportant(
+          inputWrapper,
+          'max-width',
+          '100%'
+        );
+
+        setImportant(
+          inputWrapper,
+          'border',
+          '0'
+        );
+
+        setImportant(
+          inputWrapper,
+          'outline',
+          '0'
+        );
+
+        setImportant(
+          inputWrapper,
+          'box-shadow',
+          'none'
+        );
+
+        setImportant(
+          inputWrapper,
+          'background',
+          'transparent'
+        );
+
+        setImportant(
+          inputWrapper,
+          'padding',
+          '0'
+        );
+      }
+    }
+
+
+    if (!signatureObservers.has(canvas)) {
+
+      const observer =
+        new MutationObserver(function () {
+
+          if (
+            canvas.style.getPropertyValue('width') !== '500px' ||
+            canvas.style.getPropertyValue('height') !== '200px'
+          ) {
+            lockSignatureCanvas(canvas);
+          }
+
+        });
+
+
+      observer.observe(
+        canvas,
+        {
+          attributes: true,
+          attributeFilter: ['style']
+        }
+      );
+
+
+      signatureObservers.set(
+        canvas,
+        observer
+      );
+    }
+  }
+
+
+
+  /* =========================================================
+     MAIN
+     ========================================================= */
+
+  function styleOptisForm(root) {
+
+
+    /* =========================================================
+   1. COLOR SWATCHES - FORCE SAME SIZE EVEN WHEN SELECTED
+   ========================================================= */
+
+root.querySelectorAll('.form-field')
+  .forEach(function (field) {
+
+    if (
+      !field.textContent.includes(
+        'What color would you prefer?'
+      )
+    ) {
+      return;
+    }
+
+
+    const swatches =
+      field.querySelectorAll(
+        'button.image-choice-option, ' +
+        '.image-choice-option, ' +
+        '[class*="image-choice-option"]'
+      );
+
+
+    swatches.forEach(function (swatch) {
+
+      setImportant(swatch, 'width', '30px');
+      setImportant(swatch, 'height', '30px');
+
+      setImportant(swatch, 'min-width', '30px');
+      setImportant(swatch, 'max-width', '30px');
+
+      setImportant(swatch, 'min-height', '30px');
+      setImportant(swatch, 'max-height', '30px');
+
+      setImportant(swatch, 'flex', '0 0 30px');
+
+      setImportant(swatch, 'padding', '2px');
+      setImportant(swatch, 'margin', '0');
+
+      setImportant(swatch, 'box-sizing', 'border-box');
+
+      /* IMPORTANT - stop selected-state enlargement */
+      setImportant(swatch, 'transform', 'none');
+      setImportant(swatch, 'scale', '1');
+      setImportant(swatch, 'zoom', '1');
+
+      setImportant(swatch, 'border-radius', '5px');
+
+
+      /*
+        Lock all nested elements too.
+      */
+      swatch.querySelectorAll('*')
+        .forEach(function (child) {
+
+          setImportant(child, 'max-width', '100%');
+          setImportant(child, 'max-height', '100%');
+
+          setImportant(child, 'transform', 'none');
+          setImportant(child, 'scale', '1');
+
+        });
+
+
+      const img =
+        swatch.querySelector('img');
+
+
+      if (img) {
+
+        setImportant(img, 'width', '100%');
+        setImportant(img, 'height', '100%');
+
+        setImportant(img, 'min-width', '0');
+        setImportant(img, 'min-height', '0');
+
+        setImportant(img, 'max-width', '100%');
+        setImportant(img, 'max-height', '100%');
+
+        setImportant(img, 'object-fit', 'cover');
+        setImportant(img, 'display', 'block');
+
+        setImportant(img, 'transform', 'none');
+
+        setImportant(img, 'border-radius', '4px');
+
+      }
+
+    });
+
+
+    if (swatches.length) {
+
+      const container =
+        swatches[0].parentElement;
+
+
+      if (container) {
+
+        setImportant(container, 'display', 'flex');
+        setImportant(container, 'flex-wrap', 'nowrap');
+
+        setImportant(container, 'align-items', 'center');
+        setImportant(container, 'justify-content', 'flex-start');
+
+        setImportant(container, 'gap', '10px');
+
+      }
+
+    }
+
+  });
+
+
+
+   /* =========================================================
+   2. AGREEMENT TYPOGRAPHY
+   ========================================================= */
+
+root.querySelectorAll(
+  '.form-field_html'
+).forEach(function (htmlField) {
+
+  const firstHeading =
+    htmlField.querySelector('h3');
+
+
+  if (
+    !firstHeading ||
+    firstHeading.textContent.trim() !==
+      'Content Requirements'
+  ) {
+    return;
+  }
+
+
+  /* Agreement headings */
+  htmlField.querySelectorAll(
+    'h1, h2, h3, h4, h5, h6'
+  ).forEach(function (heading) {
+
+    setImportant(
+      heading,
+      'font-family',
+      "'Montserrat', sans-serif"
+    );
+
+    setImportant(
+      heading,
+      'font-size',
+      '15px'
+    );
+
+    setImportant(
+      heading,
+      'line-height',
+      '1.5'
+    );
+
+    setImportant(
+      heading,
+      'font-weight',
+      '700'
+    );
+
+    setImportant(
+      heading,
+      'transform',
+      'none'
+    );
+
+  });
+
+
+  /* Agreement body text */
+  htmlField.querySelectorAll(
+    'p, li'
+  ).forEach(function (text) {
+
+    setImportant(
+      text,
+      'font-family',
+      "'Montserrat', sans-serif"
+    );
+
+    setImportant(
+      text,
+      'font-size',
+      '15px'
+    );
+
+    setImportant(
+      text,
+      'line-height',
+      '1.5'
+    );
+
+    setImportant(
+      text,
+      'font-weight',
+      '400'
+    );
+
+    setImportant(
+      text,
+      'transform',
+      'none'
+    );
+
+  });
+
+});
+
+
+
+    /* =========================================================
+       3. CONTENT OWNERSHIP CHECKBOX
+       NO MANUAL ASTERISK
+       ========================================================= */
+
+    const ownershipSentence =
+      'I have read and agree to the Content Ownership and Usage Rights terms. ' +
+      'I understand that the gifted K2 SPHERE product(s) are the agreed compensation ' +
+      'for creating the content and granting K2 SPHERE the rights described above.';
+
+
+    root.querySelectorAll(
+      '.form-field'
+    ).forEach(function (field) {
+
+      if (
+        !field.textContent.includes(
+          'I have read and agree to the Content Ownership and Usage Rights terms'
+        )
+      ) {
+        return;
+      }
+
+
+      const checkbox =
+        field.querySelector(
+          'input[type="checkbox"]'
+        );
+
+
+      if (!checkbox) return;
+
+
+      let row =
+        field.querySelector(
+          '.k2-ownership-row'
+        );
+
+
+      if (!row) {
+
+        field.querySelectorAll(
+          'label'
+        ).forEach(function (label) {
+
+          setImportant(
+            label,
+            'display',
+            'none'
+          );
+
+        });
+
+
+        row =
+          document.createElement('label');
+
+
+        row.className =
+          'k2-ownership-row';
+
+
+        row.appendChild(
+          checkbox
+        );
+
+
+        const textWrap =
+          document.createElement('span');
+
+
+        textWrap.className =
+          'k2-ownership-text';
+
+
+        textWrap.textContent =
+          ownershipSentence;
+
+
+        row.appendChild(
+          textWrap
+        );
+
+
+        field.insertBefore(
+          row,
+          field.firstChild
+        );
+
+      }
+
+
+
+      /* ---------------------------------------------------------
+         FIELD
+         --------------------------------------------------------- */
+
+      setImportant(
+        field,
+        'position',
+        'relative'
+      );
+
+      setImportant(
+        field,
+        'background',
+        'transparent'
+      );
+
+      setImportant(
+        field,
+        'box-sizing',
+        'border-box'
+      );
+
+      setImportant(
+        field,
+        'padding',
+        '4px 40px 4px 15px'
+      );
+
+      setImportant(
+        field,
+        'overflow',
+        'visible'
+      );
+
+
+
+      /* ---------------------------------------------------------
+         ROW
+         --------------------------------------------------------- */
+
+      setImportant(
+        row,
+        'display',
+        'flex'
+      );
+
+      setImportant(
+        row,
+        'flex-direction',
+        'row'
+      );
+
+      setImportant(
+        row,
+        'flex-wrap',
+        'nowrap'
+      );
+
+      setImportant(
+        row,
+        'align-items',
+        'center'
+      );
+
+      setImportant(
+        row,
+        'justify-content',
+        'flex-start'
+      );
+
+      setImportant(
+        row,
+        'gap',
+        '12px'
+      );
+
+      setImportant(
+        row,
+        'width',
+        '100%'
+      );
+
+      setImportant(
+        row,
+        'margin',
+        '0'
+      );
+
+      setImportant(
+        row,
+        'padding',
+        '0'
+      );
+
+      setImportant(
+        row,
+        'background',
+        'transparent'
+      );
+
+      setImportant(
+        row,
+        'cursor',
+        'pointer'
+      );
+
+
+
+      /* ---------------------------------------------------------
+         CHECKBOX
+         --------------------------------------------------------- */
+
+      setImportant(
+        checkbox,
+        'display',
+        'block'
+      );
+
+      setImportant(
+        checkbox,
+        'position',
+        'static'
+      );
+
+      setImportant(
+        checkbox,
+        'transform',
+        'none'
+      );
+
+      setImportant(
+        checkbox,
+        'width',
+        '18px'
+      );
+
+      setImportant(
+        checkbox,
+        'height',
+        '18px'
+      );
+
+      setImportant(
+        checkbox,
+        'min-width',
+        '18px'
+      );
+
+      setImportant(
+        checkbox,
+        'max-width',
+        '18px'
+      );
+
+      setImportant(
+        checkbox,
+        'flex',
+        '0 0 18px'
+      );
+
+      setImportant(
+        checkbox,
+        'margin',
+        '0'
+      );
+
+      setImportant(
+        checkbox,
+        'padding',
+        '0'
+      );
+
+
+
+      /* ---------------------------------------------------------
+         TEXT
+         --------------------------------------------------------- */
+
+      const textWrap =
+        row.querySelector(
+          '.k2-ownership-text'
+        );
+
+
+      if (textWrap) {
+
+        setImportant(
+          textWrap,
+          'display',
+          'block'
+        );
+
+        setImportant(
+          textWrap,
+          'flex',
+          '1 1 auto'
+        );
+
+        setImportant(
+          textWrap,
+          'min-width',
+          '0'
+        );
+
+        setImportant(
+          textWrap,
+          'margin',
+          '0'
+        );
+
+        setImportant(
+          textWrap,
+          'padding',
+          '0'
+        );
+
+        setImportant(
+          textWrap,
+          'background',
+          'transparent'
+        );
+
+        setImportant(
+          textWrap,
+          'font-family',
+          'inherit'
+        );
+
+        setImportant(
+          textWrap,
+          'font-size',
+          '15px'
+        );
+
+        setImportant(
+          textWrap,
+          'line-height',
+          '1.5'
+        );
+
+        setImportant(
+          textWrap,
+          'font-weight',
+          '400'
+        );
+
+        setImportant(
+          textWrap,
+          'font-style',
+          'normal'
+        );
+
+        setImportant(
+          textWrap,
+          'color',
+          '#1a1a1a'
+        );
+
+        setImportant(
+          textWrap,
+          'text-align',
+          'left'
+        );
+
+        setImportant(
+          textWrap,
+          'text-decoration',
+          'none'
+        );
+
+      }
+
+    });
+
+
+
+    /* =========================================================
+       4. CONTENT OWNERSHIP POPUP
+       ========================================================= */
+
+    let rightsField = null;
+
+
+    root.querySelectorAll(
+      '.form-field_html'
+    ).forEach(function (field) {
+
+      if (
+        field.textContent.includes(
+          'Content Ownership and Usage Rights'
+        ) &&
+        field.textContent.includes(
+          'sole owner of all video content'
+        )
+      ) {
+
+        rightsField = field;
+
+      }
+
+    });
+
+
+    if (rightsField) {
+
+      const termsHTML =
+        rightsField.innerHTML;
+
+
+      setImportant(
+        rightsField,
+        'display',
+        'none'
+      );
+
+
+      let ownershipField = null;
+
+
+      root.querySelectorAll(
+        '.form-field'
+      ).forEach(function (field) {
+
+        if (
+          field.querySelector(
+            '.k2-ownership-row'
+          )
+        ) {
+
+          ownershipField = field;
+
+        }
+
+      });
+
+
+      if (
+        ownershipField &&
+        !root.querySelector(
+          '.k2-runtime-rights-link'
+        )
+      ) {
+
+        const link =
+          document.createElement('a');
+
+
+        link.href =
+          '#';
+
+
+        link.className =
+          'k2-runtime-rights-link';
+
+
+        link.textContent =
+          'View Content Ownership and Usage Rights Terms';
+
+
+        setImportant(
+          link,
+          'display',
+          'inline-block'
+        );
+
+        setImportant(
+          link,
+          'margin',
+          '22px 0 24px'
+        );
+
+        setImportant(
+          link,
+          'font-family',
+          'inherit'
+        );
+
+        setImportant(
+          link,
+          'font-size',
+          '14px'
+        );
+
+        setImportant(
+          link,
+          'line-height',
+          '1.5'
+        );
+
+        setImportant(
+          link,
+          'font-weight',
+          '400'
+        );
+
+        setImportant(
+          link,
+          'color',
+          '#1a1a1a'
+        );
+
+        setImportant(
+          link,
+          'text-decoration',
+          'underline'
+        );
+
+        setImportant(
+          link,
+          'cursor',
+          'pointer'
+        );
+
+
+        ownershipField.insertAdjacentElement(
+          'afterend',
+          link
+        );
+
+
+
+        const modal =
+          document.createElement('div');
+
+
+        modal.className =
+          'k2-runtime-rights-modal';
+
+
+        Object.assign(
+          modal.style,
+          {
+            position: 'fixed',
+            inset: '0',
+            zIndex: '999999',
+            display: 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            background: 'rgba(0,0,0,.55)'
+          }
+        );
+
+
+
+        const box =
+          document.createElement('div');
+
+
+        Object.assign(
+          box.style,
+          {
+            position: 'relative',
+            background: '#ffffff',
+            width: '500px',
+            maxWidth: '92vw',
+            maxHeight: '85vh',
+            overflowY: 'auto',
+            padding: '30px 28px 28px',
+            borderRadius: '8px',
+            color: '#1a1a1a',
+            fontFamily: 'inherit'
+          }
+        );
+
+
+
+        const close =
+          document.createElement('button');
+
+
+        close.type =
+          'button';
+
+
+        close.innerHTML =
+          '&times;';
+
+
+        Object.assign(
+          close.style,
+          {
+            position: 'absolute',
+            top: '8px',
+            right: '12px',
+            border: '0',
+            background: 'transparent',
+            color: '#111111',
+            fontSize: '20px',
+            lineHeight: '1',
+            cursor: 'pointer',
+            padding: '4px'
+          }
+        );
+
+
+
+        const content =
+          document.createElement('div');
+
+
+        content.innerHTML =
+          termsHTML;
+
+
+        const heading =
+          content.querySelector('h3');
+
+
+        if (heading) {
+          heading.remove();
+        }
+
+
+        content.querySelectorAll(
+          'p'
+        ).forEach(function (paragraph) {
+
+          setImportant(
+            paragraph,
+            'font-family',
+            'inherit'
+          );
+
+          setImportant(
+            paragraph,
+            'font-size',
+            '16px'
+          );
+
+          setImportant(
+            paragraph,
+            'line-height',
+            '1.48'
+          );
+
+          setImportant(
+            paragraph,
+            'font-weight',
+            '400'
+          );
+
+          setImportant(
+            paragraph,
+            'margin',
+            '0 0 18px'
+          );
+
+        });
+
+
+
+        const actions =
+          document.createElement('div');
+
+
+        Object.assign(
+          actions.style,
+          {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+            marginTop: '22px'
+          }
+        );
+
+
+
+        const ok =
+          document.createElement('button');
+
+
+        ok.type =
+          'button';
+
+
+        ok.textContent =
+          'OK';
+
+
+        Object.assign(
+          ok.style,
+          {
+            padding: '10px 13px',
+            border: '0',
+            borderRadius: '5px',
+            background: '#6747e7',
+            color: '#ffffff',
+            fontSize: '16px',
+            cursor: 'pointer'
+          }
+        );
+
+
+
+        const cancel =
+          document.createElement('button');
+
+
+        cancel.type =
+          'button';
+
+
+        cancel.textContent =
+          'Cancel';
+
+
+        Object.assign(
+          cancel.style,
+          {
+            padding: '0',
+            border: '0',
+            background: 'transparent',
+            color: '#1a1a1a',
+            fontSize: '14px',
+            textDecoration: 'underline',
+            cursor: 'pointer'
+          }
+        );
+
+
+
+        actions.appendChild(ok);
+        actions.appendChild(cancel);
+
+        box.appendChild(close);
+        box.appendChild(content);
+        box.appendChild(actions);
+
+        modal.appendChild(box);
+
+        root.appendChild(modal);
+
+
+
+        function closeModal() {
+
+          modal.style.display =
+            'none';
+
+        }
+
+
+        link.addEventListener(
+          'click',
+          function (event) {
+
+            event.preventDefault();
+
+            modal.style.display =
+              'flex';
+
+          }
+        );
+
+
+        close.addEventListener(
+          'click',
+          closeModal
+        );
+
+
+        ok.addEventListener(
+          'click',
+          closeModal
+        );
+
+
+        cancel.addEventListener(
+          'click',
+          closeModal
+        );
+
+
+        modal.addEventListener(
+          'click',
+          function (event) {
+
+            if (
+              event.target === modal
+            ) {
+
+              closeModal();
+
+            }
+
+          }
+        );
+
+      }
+
+    }
+
+
+
+    /* =========================================================
+       5. HIDE SIGNATURE TEXT FIELD
+       ========================================================= */
+
+    root.querySelectorAll(
+      'input'
+    ).forEach(function (input) {
+
+      const placeholder =
+        (
+          input.getAttribute(
+            'placeholder'
+          ) || ''
+        )
+        .trim()
+        .toLowerCase();
+
+
+      if (
+        placeholder.includes(
+          'type your full name'
+        )
+      ) {
+
+        setImportant(
+          input,
+          'display',
+          'none'
+        );
+
+      }
+
+    });
+
+
+
+    /* =========================================================
+       6. HIDE SIGNATURE HELPER
+       ========================================================= */
+
+    root.querySelectorAll('*')
+      .forEach(function (element) {
+
+        if (
+          element.children.length === 0 &&
+          element.textContent.trim() ===
+            'Sign with your mouse or finger'
+        ) {
+
+          setImportant(
+            element,
+            'display',
+            'none'
+          );
+
+        }
+
+      });
+
+
+
+    /* =========================================================
+       7. SIGNATURE LABEL/CANVAS
+       ========================================================= */
+
+    root.querySelectorAll(
+      'canvas[aria-label="Signature drawing area"]'
+    ).forEach(function (canvas) {
+
+      lockSignatureCanvas(
+        canvas
+      );
+
+
+      const field =
+        canvas.closest(
+          '.form-field'
+        );
+
+
+      if (field) {
+
+        const label =
+          field.querySelector('label');
+
+
+        if (label) {
+
+          setImportant(
+            label,
+            'font-family',
+            'inherit'
+          );
+
+          setImportant(
+            label,
+            'font-size',
+            '14px'
+          );
+
+          setImportant(
+            label,
+            'line-height',
+            '1.5'
+          );
+
+          setImportant(
+            label,
+            'font-weight',
+            '400'
+          );
+
+          setImportant(
+            label,
+            'margin-bottom',
+            '12px'
+          );
+
+        }
+
+      }
+
+    });
+
+
+
+    /* =========================================================
+       8. CLEAR
+       ========================================================= */
+
+    root.querySelectorAll(
+      'button.signature-clear'
+    ).forEach(function (button) {
+
+      setImportant(button, 'display', 'block');
+      setImportant(button, 'width', 'auto');
+      setImportant(button, 'min-width', '0');
+
+      setImportant(button, 'margin', '8px 0 0 0');
+      setImportant(button, 'padding', '6px 12px');
+
+      setImportant(button, 'background', '#ffffff');
+      setImportant(button, 'color', '#111111');
+
+      setImportant(
+        button,
+        'border',
+        '1px solid #dddddd'
+      );
+
+      setImportant(
+        button,
+        'border-radius',
+        '4px'
+      );
+
+      setImportant(
+        button,
+        'box-shadow',
+        'none'
+      );
+
+      setImportant(button, 'font-size', '14px');
+      setImportant(button, 'font-weight', '400');
+      setImportant(button, 'line-height', '20px');
+
+    });
+
+
+
+    /* =========================================================
+       9. SUBMIT
+       ========================================================= */
+
+    root.querySelectorAll(
+      'button'
+    ).forEach(function (button) {
+
+      if (
+        button.textContent.trim() ===
+          'Submit'
+      ) {
+
+        setImportant(
+          button,
+          'background',
+          '#171717'
+        );
+
+        setImportant(
+          button,
+          'color',
+          '#ffffff'
+        );
+
+        setImportant(
+          button,
+          'border',
+          '0'
+        );
+
+        setImportant(
+          button,
+          'border-radius',
+          '4px'
+        );
+
+        setImportant(
+          button,
+          'width',
+          'auto'
+        );
+
+        setImportant(
+          button,
+          'min-width',
+          '0'
+        );
+
+        setImportant(
+          button,
+          'padding',
+          '9px 16px'
+        );
+
+        setImportant(
+          button,
+          'font-size',
+          '14px'
+        );
+
+        setImportant(
+          button,
+          'font-weight',
+          '600'
+        );
+
+        setImportant(
+          button,
+          'line-height',
+          '20px'
+        );
+
+        setImportant(
+          button,
+          'display',
+          'block'
+        );
+
+        setImportant(
+          button,
+          'margin-left',
+          '0'
+        );
+
+        setImportant(
+          button,
+          'margin-right',
+          'auto'
+        );
+
+        setImportant(
+          button,
+          'margin-top',
+          '24px'
+        );
+
+      }
+
+    });
+
+
+
+    /* =========================================================
+       10. SHADOW DOM
+       ========================================================= */
+
+    root.querySelectorAll('*')
+      .forEach(function (element) {
+
+        if (element.shadowRoot) {
+
+          styleOptisForm(
+            element.shadowRoot
+          );
+
+        }
+
+      });
+
+  }
+
+
+
+  /* =========================================================
+     APPLY
+     ========================================================= */
+
+  function applyOptisStyles() {
+
+    styleOptisForm(document);
+
+  }
+
+
+  applyOptisStyles();
+
+  requestAnimationFrame(
+    applyOptisStyles
+  );
+
+  setTimeout(
+    applyOptisStyles,
+    100
+  );
+
+  setTimeout(
+    applyOptisStyles,
+    500
+  );
+
+  setTimeout(
+    applyOptisStyles,
+    1500
+  );
+
+
+
+  /* =========================================================
+     WATCH OPTIS
+     ========================================================= */
+
+  const observer =
+    new MutationObserver(
+      function (mutations) {
+
+        const changed =
+          mutations.some(
+            function (mutation) {
+
+              return (
+                mutation.type ===
+                  'childList'
+              );
+
+            }
+          );
+
+
+        if (changed) {
+
+          requestAnimationFrame(
+            applyOptisStyles
+          );
+
+        }
+
+      }
+    );
+
+
+observer.observe(
+  document.documentElement,
+  {
+    childList: true,
+    subtree: true
+  }
+);
+/* =========================================================
+   K2 SPHERE - PERMANENT OPTIS COLOR SWATCH FIX
+   ========================================================= */
+
+function k2FixOptisColorSwatches(root) {
+
+  if (!root || !root.querySelectorAll) return;
+
+  /* DESKTOP ONLY — mobile is handled by the hard-lock mobile script */
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    return;
+  }
+
+
+
+  const swatches =
+    root.querySelectorAll('.image-choice-option');
+
+
+  swatches.forEach(function (button) {
+
+    /* KEEP EACH COLOR SWATCH 30x30 */
+    button.style.setProperty(
+      'width',
+      '30px',
+      'important'
+    );
+
+    button.style.setProperty(
+      'height',
+      '30px',
+      'important'
+    );
+
+    button.style.setProperty(
+      'min-width',
+      '30px',
+      'important'
+    );
+
+    button.style.setProperty(
+      'max-width',
+      '30px',
+      'important'
+    );
+
+    button.style.setProperty(
+      'min-height',
+      '30px',
+      'important'
+    );
+
+    button.style.setProperty(
+      'max-height',
+      '30px',
+      'important'
+    );
+
+    button.style.setProperty(
+      'box-sizing',
+      'border-box',
+      'important'
+    );
+
+    button.style.setProperty(
+      'transform',
+      'none',
+      'important'
+    );
+
+
+    const img =
+      button.querySelector('img');
+
+
+    if (img) {
+
+      img.style.setProperty(
+        'width',
+        '100%',
+        'important'
+      );
+
+      img.style.setProperty(
+        'height',
+        '100%',
+        'important'
+      );
+
+      img.style.setProperty(
+        'max-width',
+        '100%',
+        'important'
+      );
+
+      img.style.setProperty(
+        'max-height',
+        '100%',
+        'important'
+      );
+
+      img.style.setProperty(
+        'object-fit',
+        'cover',
+        'important'
+      );
+
+    }
+
+  });
+
+
+  /*
+    MOBILE:
+    exact Console-tested layout:
+    6 colors first row + 2 second row.
+  */
+  if (
+    window.matchMedia(
+      '(max-width: 767px)'
+    ).matches &&
+    swatches.length
+  ) {
+
+    const row =
+      swatches[0].parentElement;
+
+
+    if (row) {
+
+      row.style.setProperty(
+        'display',
+        'grid',
+        'important'
+      );
+
+      row.style.setProperty(
+        'grid-template-columns',
+        'repeat(6, 30px)',
+        'important'
+      );
+
+      row.style.setProperty(
+        'grid-auto-flow',
+        'row',
+        'important'
+      );
+
+      row.style.setProperty(
+        'gap',
+        '8px',
+        'important'
+      );
+
+      row.style.setProperty(
+        'width',
+        '220px',
+        'important'
+      );
+
+      row.style.setProperty(
+        'max-width',
+        '100%',
+        'important'
+      );
+
+      row.style.setProperty(
+        'min-width',
+        '0',
+        'important'
+      );
+
+      row.style.setProperty(
+        'overflow',
+        'visible',
+        'important'
+      );
+
+      row.style.setProperty(
+        'justify-content',
+        'start',
+        'important'
+      );
+
+      row.style.setProperty(
+        'box-sizing',
+        'border-box',
+        'important'
+      );
+
+    }
+
+  }
+
+
+  /*
+    DESKTOP:
+    keep the original horizontal row.
+  */
+  else if (swatches.length) {
+
+    const row =
+      swatches[0].parentElement;
+
+
+    if (row) {
+
+      row.style.setProperty(
+        'display',
+        'flex',
+        'important'
+      );
+
+      row.style.setProperty(
+        'flex-wrap',
+        'nowrap',
+        'important'
+      );
+
+      row.style.setProperty(
+        'gap',
+        '10px',
+        'important'
+      );
+
+      row.style.removeProperty(
+        'grid-template-columns'
+      );
+
+      row.style.removeProperty(
+        'grid-auto-flow'
+      );
+
+      row.style.removeProperty(
+        'width'
+      );
+
+    }
+
+  }
+
+
+  /* SEARCH OPTIS SHADOW DOM */
+  root.querySelectorAll('*')
+    .forEach(function (element) {
+
+      if (element.shadowRoot) {
+
+        k2FixOptisColorSwatches(
+          element.shadowRoot
+        );
+
+      }
+
+    });
+
+}
+
+
+/* Apply when the form first loads */
+k2FixOptisColorSwatches(document);
+
+
+/* Reapply after OPTIS changes the selected color */
+document.addEventListener(
+  'click',
+  function () {
+
+    requestAnimationFrame(function () {
+      k2FixOptisColorSwatches(document);
+    });
+
+    setTimeout(function () {
+      k2FixOptisColorSwatches(document);
+    }, 50);
+
+    setTimeout(function () {
+      k2FixOptisColorSwatches(document);
+    }, 150);
+
+  },
+  true
+);
+
+
+/* Handle OPTIS rendering/re-rendering the form */
+const k2OptisSwatchObserver =
+  new MutationObserver(function () {
+
+    k2FixOptisColorSwatches(document);
+
+  });
+
+
+k2OptisSwatchObserver.observe(
+  document.documentElement,
+  {
+    childList: true,
+    subtree: true
+  }
+);
+
+
+
+/* =========================================================
+   K2 SPHERE - OPTIS FONT
+   ========================================================= */
+
+function k2ApplyMontserrat(root) {
+
+  if (!root || !root.querySelectorAll) return;
+
+  root.querySelectorAll(
+    'h1, h2, h3, h4, h5, h6, p, span, label, li, a, button, input, select, textarea'
+  ).forEach(function (el) {
+
+    el.style.setProperty(
+      'font-family',
+      "'Montserrat', sans-serif",
+      'important'
+    );
+
+  });
+
+  root.querySelectorAll('*').forEach(function (el) {
+
+    if (el.shadowRoot) {
+      k2ApplyMontserrat(el.shadowRoot);
+    }
+
+  });
+
+}
+
+k2ApplyMontserrat(document);
+
+setTimeout(function () {
+  k2ApplyMontserrat(document);
+}, 500);
+
+setTimeout(function () {
+  k2ApplyMontserrat(document);
+}, 1200);
+/* =========================================================
+   K2 SPHERE - AGREEMENT TYPOGRAPHY FIX
+   Late OPTIS Shadow DOM discovery + instant rerender fix
+   ========================================================= */
+
+(function () {
+
+  const headings = [
+    'Content Requirements',
+    'FTC Disclosure',
+    'Content Delivery',
+    'Content Quality',
+    'Non-Delivery',
+    'Confidentiality',
+    'Governing Law'
+  ];
+
+  const bodyStarts = [
+    'Products must be clearly visible',
+    'Content must be authentic',
+    'Tag @k2sphere',
+    'Include a link to the K2 SPHERE',
+    'Content must remain publicly available',
+    'Influencer agrees to comply',
+    'The Influencer agrees to create',
+    'If the Influencer is unable',
+    'All submitted content must meet',
+    'K2 SPHERE LLC reserves the right',
+    'If the Influencer fails to publish',
+    'Return of all products',
+    'Reimbursement of the full retail value',
+    'The Influencer agrees to keep confidential',
+    'This Agreement shall be governed'
+  ];
+
+  const watchedRoots = new WeakSet();
+
+
+  function applyAgreementStyles(root) {
+
+    if (!root || !root.querySelectorAll) return;
+
+
+    root.querySelectorAll(
+      'h1,h2,h3,h4,h5,h6,p,li,div,span'
+    ).forEach(function (el) {
+
+      const text =
+        (el.textContent || '').trim();
+
+
+      if (!text) return;
+
+
+      /*
+        Only style the deepest element containing
+        the actual agreement text.
+      */
+      const childHasSameText =
+        Array.from(el.children || [])
+          .some(function (child) {
+
+            return (
+              (child.textContent || '').trim()
+              === text
+            );
+
+          });
+
+
+      if (childHasSameText) return;
+
+
+      /* HEADINGS */
+      if (headings.includes(text)) {
+
+        el.style.setProperty(
+          'font-family',
+          "'Montserrat', sans-serif",
+          'important'
+        );
+
+        el.style.setProperty(
+          'font-size',
+          '15px',
+          'important'
+        );
+
+        el.style.setProperty(
+          'line-height',
+          '1.5',
+          'important'
+        );
+
+        el.style.setProperty(
+          'font-weight',
+          '700',
+          'important'
+        );
+
+        return;
+      }
+
+
+      /* BODY */
+      const isBody =
+        bodyStarts.some(function (start) {
+
+          return text.startsWith(start);
+
+        });
+
+
+      if (isBody) {
+
+        el.style.setProperty(
+          'font-family',
+          "'Montserrat', sans-serif",
+          'important'
+        );
+
+        el.style.setProperty(
+          'font-size',
+          '15px',
+          'important'
+        );
+
+        el.style.setProperty(
+          'line-height',
+          '1.5',
+          'important'
+        );
+
+        el.style.setProperty(
+          'font-weight',
+          '400',
+          'important'
+        );
+
+      }
+
+    });
+
+  }
+
+
+  function watchRoot(root) {
+
+    if (
+      !root ||
+      watchedRoots.has(root)
+    ) {
+      return;
+    }
+
+
+    watchedRoots.add(root);
+
+    applyAgreementStyles(root);
+
+
+    const observer =
+      new MutationObserver(function () {
+
+        /*
+          OPTIS replaced/rebuilt something.
+          Correct it immediately.
+        */
+        applyAgreementStyles(root);
+
+        discoverShadowRoots(root);
+
+      });
+
+
+    observer.observe(
+      root,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+
+  }
+
+
+  function discoverShadowRoots(root) {
+
+    if (
+      !root ||
+      !root.querySelectorAll
+    ) {
+      return;
+    }
+
+
+    watchRoot(root);
+
+
+    root.querySelectorAll('*')
+      .forEach(function (el) {
+
+        if (el.shadowRoot) {
+
+          watchRoot(
+            el.shadowRoot
+          );
+
+          discoverShadowRoots(
+            el.shadowRoot
+          );
+
+        }
+
+      });
+
+  }
+
+
+  function agreementExists() {
+
+    let found = false;
+
+
+    function search(root) {
+
+      if (
+        found ||
+        !root ||
+        !root.querySelectorAll
+      ) {
+        return;
+      }
+
+
+      root.querySelectorAll('*')
+        .forEach(function (el) {
+
+          if (found) return;
+
+
+          const text =
+            (el.textContent || '').trim();
+
+
+          if (
+            text === 'Content Requirements'
+          ) {
+
+            found = true;
+            return;
+
+          }
+
+
+          if (el.shadowRoot) {
+
+            search(
+              el.shadowRoot
+            );
+
+          }
+
+        });
+
+    }
+
+
+    search(document);
+
+    return found;
+  }
+
+
+  /*
+    IMPORTANT:
+    OPTIS can create its Shadow DOM well after
+    theme.liquid has already executed.
+
+    This timer ONLY searches for the Shadow DOM.
+    It does NOT repeatedly change typography.
+  */
+  let discoveryAttempts = 0;
+
+
+  const discoveryTimer =
+    setInterval(function () {
+
+      discoveryAttempts++;
+
+
+      discoverShadowRoots(
+        document
+      );
+
+
+      /*
+        Once the agreement section actually exists,
+        apply once more and stop polling.
+      */
+      if (agreementExists()) {
+
+        discoverShadowRoots(
+          document
+        );
+
+        clearInterval(
+          discoveryTimer
+        );
+
+        console.log(
+          'K2 OPTIS agreement typography attached.'
+        );
+
+        return;
+      }
+
+
+      /*
+        Safety stop after 20 seconds.
+      */
+      if (discoveryAttempts >= 80) {
+
+        clearInterval(
+          discoveryTimer
+        );
+
+      }
+
+    }, 250);
+
+})();
+/* =========================================================
+   K2 SPHERE - HIDE PAGE HEADING ON SUCCESS STATE
+   ========================================================= */
+
+(function () {
+
+  const HEADING_TEXT =
+    'Creator Onboarding and Intellectual Property Agreement';
+
+  const SUCCESS_TEXT =
+    'Thanks for getting in touch!';
+
+  const watchedRoots = new WeakSet();
+
+
+  function successIsVisible() {
+
+    let found = false;
+
+
+    function search(root) {
+
+      if (
+        found ||
+        !root ||
+        !root.querySelectorAll
+      ) {
+        return;
+      }
+
+
+      root.querySelectorAll(
+        'h1, h2, h3, h4, h5, h6, p, div, span'
+      ).forEach(function (el) {
+
+        if (
+          (el.textContent || '').trim()
+          === SUCCESS_TEXT
+        ) {
+          found = true;
+        }
+
+      });
+
+
+      root.querySelectorAll('*')
+        .forEach(function (el) {
+
+          if (
+            !found &&
+            el.shadowRoot
+          ) {
+            search(el.shadowRoot);
+          }
+
+        });
+
+    }
+
+
+    search(document);
+
+    return found;
+  }
+
+
+  function updateK2SuccessHeading() {
+
+    const heading =
+      Array.from(
+        document.querySelectorAll(
+          'h1, h2, h3, h4, h5, h6, p, div, span'
+        )
+      ).find(function (el) {
+
+        return (
+          (el.textContent || '').trim()
+          === HEADING_TEXT
+        );
+
+      });
+
+
+    if (!heading) {
+      return;
+    }
+
+
+    const section =
+      heading.closest('.shopify-section') ||
+      heading.closest('section') ||
+      heading.parentElement;
+
+
+    if (!section) {
+      return;
+    }
+
+
+    if (successIsVisible()) {
+
+      section.style.setProperty(
+        'display',
+        'none',
+        'important'
+      );
+
+    } else {
+
+      section.style.removeProperty(
+        'display'
+      );
+
+    }
+
+  }
+
+
+  function watchRoot(root) {
+
+    if (
+      !root ||
+      watchedRoots.has(root)
+    ) {
+      return;
+    }
+
+
+    watchedRoots.add(root);
+
+
+    const observer =
+      new MutationObserver(function () {
+
+        updateK2SuccessHeading();
+
+        discoverRoots(root);
+
+      });
+
+
+    observer.observe(
+      root,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+
+  }
+
+
+  function discoverRoots(root) {
+
+    if (
+      !root ||
+      !root.querySelectorAll
+    ) {
+      return;
+    }
+
+
+    watchRoot(root);
+
+
+    root.querySelectorAll('*')
+      .forEach(function (el) {
+
+        if (el.shadowRoot) {
+
+          watchRoot(
+            el.shadowRoot
+          );
+
+          discoverRoots(
+            el.shadowRoot
+          );
+
+        }
+
+      });
+
+  }
+
+
+  discoverRoots(document);
+  updateK2SuccessHeading();
+
+})();
+
+});
+</script>
+<script>
+(function () {
+
+  const MOBILE_QUERY = window.matchMedia('(max-width: 767px)');
+  const TITLE_TEXT =
+    'Creator Onboarding and Intellectual Property Agreement';
+
+  let activeRoot = null;
+  let widthObserver = null;
+  let swatchObserver = null;
+
+  let swatchApplying = false;
+  let swatchScheduled = false;
+
+
+  function setImportant(el, property, value) {
+    if (!el) return;
+
+    el.style.setProperty(
+      property,
+      value,
+      'important'
+    );
+  }
+
+
+  function setIfDifferent(el, property, value) {
+    if (!el) return;
+
+    if (
+      el.style.getPropertyValue(property) !== value ||
+      el.style.getPropertyPriority(property) !== 'important'
+    ) {
+      el.style.setProperty(
+        property,
+        value,
+        'important'
+      );
+    }
+  }
+
+
+  /* =========================================================
+     MOBILE WIDTH / OVERFLOW
+     ========================================================= */
+
+  function fixMobileWidth(host, root) {
+
+    if (!MOBILE_QUERY.matches) return;
+
+    setImportant(host, 'display', 'block');
+    setImportant(host, 'width', '100%');
+    setImportant(host, 'max-width', '100%');
+    setImportant(host, 'min-width', '0');
+    setImportant(host, 'box-sizing', 'border-box');
+
+
+    if (!root.querySelector('#k2-mobile-width-style')) {
+
+      const style =
+        document.createElement('style');
+
+      style.id =
+        'k2-mobile-width-style';
+
+      style.textContent = `
+        @media (max-width: 767px) {
+
+          :host {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          form,
+          fieldset {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          input,
+          select,
+          textarea {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            box-sizing: border-box !important;
+          }
+
+          label,
+          p,
+          li,
+          span {
+            max-width: 100% !important;
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            overflow-wrap: anywhere !important;
+            word-break: normal !important;
+          }
+
+        }
+      `;
+
+      root.appendChild(style);
+    }
+
+
+    const hostRect =
+      host.getBoundingClientRect();
+
+
+    root.querySelectorAll('*')
+      .forEach(function (el) {
+
+        const rect =
+          el.getBoundingClientRect();
+
+        if (
+          rect.width > hostRect.width + 2 ||
+          rect.right > hostRect.right + 2
+        ) {
+
+          let node = el;
+          let levels = 0;
+
+          while (
+            node &&
+            levels < 6
+          ) {
+
+            setImportant(
+              node,
+              'max-width',
+              '100%'
+            );
+
+            setImportant(
+              node,
+              'min-width',
+              '0'
+            );
+
+            setImportant(
+              node,
+              'box-sizing',
+              'border-box'
+            );
+
+
+            const display =
+              getComputedStyle(node).display;
+
+            if (
+              display === 'block' ||
+              display === 'flex' ||
+              display === 'grid' ||
+              node.matches(
+                'input, select, textarea, fieldset'
+              )
+            ) {
+
+              setImportant(
+                node,
+                'width',
+                '100%'
+              );
+            }
+
+            node =
+              node.parentElement;
+
+            levels++;
+          }
+        }
+      });
+  }
+
+
+  /* =========================================================
+     TITLE → FORM SPACING
+     ========================================================= */
+
+  function fixMobileSpacing(host, root) {
+
+    if (!MOBILE_QUERY.matches) return;
+
+
+    const heading =
+      Array.from(
+        document.querySelectorAll(
+          'h1,h2,h3,h4,h5,h6,p,div,span'
+        )
+      ).find(function (el) {
+
+        return (
+          (el.textContent || '').trim()
+          === TITLE_TEXT
+        );
+      });
+
+
+    if (!heading) return;
+
+
+    function clearBottom(el) {
+
+      if (
+        !el ||
+        el.nodeType !== 1
+      ) return;
+
+
+      const css =
+        getComputedStyle(el);
+
+
+      if (parseFloat(css.marginBottom) > 20) {
+        setImportant(
+          el,
+          'margin-bottom',
+          '0px'
+        );
+      }
+
+
+      if (parseFloat(css.paddingBottom) > 20) {
+        setImportant(
+          el,
+          'padding-bottom',
+          '0px'
+        );
+      }
+    }
+
+
+    function clearTop(el) {
+
+      if (
+        !el ||
+        el.nodeType !== 1
+      ) return;
+
+
+      const css =
+        getComputedStyle(el);
+
+
+      if (parseFloat(css.marginTop) > 20) {
+        setImportant(
+          el,
+          'margin-top',
+          '0px'
+        );
+      }
+
+
+      if (parseFloat(css.paddingTop) > 20) {
+        setImportant(
+          el,
+          'padding-top',
+          '0px'
+        );
+      }
+    }
+
+
+    let node = heading;
+
+    for (
+      let i = 0;
+      node && i < 6;
+      i++
+    ) {
+
+      clearBottom(node);
+
+      node =
+        node.parentElement;
+    }
+
+
+    node = host;
+
+    for (
+      let i = 0;
+      node && i < 6;
+      i++
+    ) {
+
+      clearTop(node);
+
+      node =
+        node.parentElement;
+    }
+
+
+    const firstField =
+      root.querySelector(
+        'input, select, textarea'
+      );
+
+
+    if (firstField) {
+
+      node = firstField;
+
+      for (
+        let i = 0;
+        node && i < 8;
+        i++
+      ) {
+
+        clearTop(node);
+
+        node =
+          node.parentElement;
+      }
+    }
+  }
+
+
+  /* =========================================================
+     SWATCH HARD LOCK
+     EXACT CONSOLE-TESTED 6 + 2 FIX
+     ========================================================= */
+
+  function lockSwatches(root) {
+
+    if (
+      !MOBILE_QUERY.matches ||
+      swatchApplying
+    ) {
+      return;
+    }
+
+
+    swatchApplying = true;
+
+
+    const swatches =
+      Array.from(
+        root.querySelectorAll(
+          '.image-choice-option'
+        )
+      );
+
+
+    if (!swatches.length) {
+
+      swatchApplying = false;
+      return;
+    }
+
+
+    swatches.forEach(function (swatch) {
+
+      setIfDifferent(
+        swatch,
+        'width',
+        '30px'
+      );
+
+      setIfDifferent(
+        swatch,
+        'height',
+        '30px'
+      );
+
+      setIfDifferent(
+        swatch,
+        'min-width',
+        '30px'
+      );
+
+      setIfDifferent(
+        swatch,
+        'max-width',
+        '30px'
+      );
+
+      setIfDifferent(
+        swatch,
+        'min-height',
+        '30px'
+      );
+
+      setIfDifferent(
+        swatch,
+        'max-height',
+        '30px'
+      );
+
+      setIfDifferent(
+        swatch,
+        'flex',
+        'none'
+      );
+
+      setIfDifferent(
+        swatch,
+        'box-sizing',
+        'border-box'
+      );
+
+    });
+
+
+    const row =
+      swatches[0].parentElement;
+
+
+    if (row) {
+
+      setIfDifferent(
+        row,
+        'display',
+        'grid'
+      );
+
+      setIfDifferent(
+        row,
+        'grid-template-columns',
+        'repeat(6, 30px)'
+      );
+
+      setIfDifferent(
+        row,
+        'grid-auto-flow',
+        'row'
+      );
+
+      setIfDifferent(
+        row,
+        'gap',
+        '8px'
+      );
+
+      setIfDifferent(
+        row,
+        'width',
+        '220px'
+      );
+
+      setIfDifferent(
+        row,
+        'max-width',
+        '100%'
+      );
+
+      setIfDifferent(
+        row,
+        'min-width',
+        '0'
+      );
+
+      setIfDifferent(
+        row,
+        'overflow',
+        'visible'
+      );
+
+      setIfDifferent(
+        row,
+        'justify-content',
+        'start'
+      );
+
+      setIfDifferent(
+        row,
+        'box-sizing',
+        'border-box'
+      );
+
+    }
+
+
+    swatchApplying = false;
+  }
+
+
+  function scheduleSwatchLock(root) {
+
+    if (swatchScheduled) return;
+
+
+    swatchScheduled = true;
+
+
+    requestAnimationFrame(function () {
+
+      swatchScheduled = false;
+
+      lockSwatches(root);
+
+    });
+  }
+
+
+  /* =========================================================
+     INITIALIZE
+     ========================================================= */
+
+  function initializeK2Mobile() {
+
+    if (!MOBILE_QUERY.matches) {
+      return false;
+    }
+
+
+    const host =
+      document.querySelector(
+        'dynamic-form'
+      );
+
+
+    if (
+      !host ||
+      !host.shadowRoot
+    ) {
+      return false;
+    }
+
+
+    const root =
+      host.shadowRoot;
+
+
+    fixMobileWidth(
+      host,
+      root
+    );
+
+    fixMobileSpacing(
+      host,
+      root
+    );
+
+    lockSwatches(
+      root
+    );
+
+
+    if (activeRoot !== root) {
+
+      activeRoot = root;
+
+
+      if (widthObserver) {
+        widthObserver.disconnect();
+      }
+
+
+      if (swatchObserver) {
+        swatchObserver.disconnect();
+      }
+
+
+      widthObserver =
+        new MutationObserver(function () {
+
+          if (MOBILE_QUERY.matches) {
+
+            fixMobileWidth(
+              host,
+              root
+            );
+          }
+
+        });
+
+
+      widthObserver.observe(
+        root,
+        {
+          childList: true,
+          subtree: true
+        }
+      );
+
+
+      /*
+        IMPORTANT:
+        Watch style/class changes because
+        OPTIS rewrites them after rendering.
+      */
+      const swatchObserverConfig = {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  attributeFilter: [
+    'style',
+    'class'
+  ]
+};
+
+swatchObserver =
+  new MutationObserver(function () {
+
+    if (
+      !MOBILE_QUERY.matches ||
+      swatchApplying
+    ) {
+      return;
+    }
+
+    /* Prevent our own changes from causing a loop */
+    swatchObserver.disconnect();
+
+    lockSwatches(root);
+
+    requestAnimationFrame(function () {
+
+      lockSwatches(root);
+
+      swatchObserver.observe(
+        root,
+        swatchObserverConfig
+      );
+
+    });
+
+  });
+
+swatchObserver.observe(
+  root,
+  swatchObserverConfig
+);
+
+
+      function relock() {
+
+        lockSwatches(root);
+
+
+        setTimeout(
+          function () {
+            lockSwatches(root);
+          },
+          50
+        );
+
+
+        setTimeout(
+          function () {
+            lockSwatches(root);
+          },
+          200
+        );
+      }
+
+
+      root.addEventListener(
+        'change',
+        relock,
+        true
+      );
+
+
+      root.addEventListener(
+        'click',
+        relock,
+        true
+      );
+    }
+
+
+    lockSwatches(root);
+
+
+    setTimeout(
+      function () {
+        lockSwatches(root);
+      },
+      100
+    );
+
+
+    setTimeout(
+      function () {
+        lockSwatches(root);
+      },
+      500
+    );
+
+
+    console.log(
+      'K2 MOBILE HARD LOCK ACTIVE'
+    );
+
+
+    return true;
+  }
+
+
+  function startK2Mobile() {
+
+    if (initializeK2Mobile()) {
+      return;
+    }
+
+
+    let attempts = 0;
+
+
+    const timer =
+      setInterval(
+        function () {
+
+          attempts++;
+
+
+          if (
+            initializeK2Mobile() ||
+            attempts >= 80
+          ) {
+
+            clearInterval(
+              timer
+            );
+          }
+
+        },
+        250
+      );
+  }
+
+
+  if (
+    document.readyState === 'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      startK2Mobile,
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    startK2Mobile();
+
+  }
+
+
+  if (MOBILE_QUERY.addEventListener) {
+
+    MOBILE_QUERY.addEventListener(
+      'change',
+      function () {
+
+        if (MOBILE_QUERY.matches) {
+          startK2Mobile();
+        }
+
+      }
+    );
+  }
+
+
+})();
+</script>
+
+
+ 
+
+{% endif %}
+</body>
+</html>
