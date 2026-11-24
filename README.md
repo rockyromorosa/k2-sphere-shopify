@@ -248,8 +248,7 @@ k2-sphere-shopify/
 └── README.md
 ```
 
-> **Source note:** The file uploaded as `product-media.liquid` contains a full mobile product section named `DTC Custom Product Mobile`. Its original theme path has not yet been independently confirmed. These selected files also include pre-existing theme code and do not form a complete runnable Shopify theme. A separate legacy copy of the README is temporarily present at the repository root and can be removed after this version is restored.
-
+> **Source note:** The file uploaded as `product-media.liquid` contains a full mobile product section named `DTC Custom Product Mobile`. Its original theme path has not yet been independently confirmed. These selected files also include pre-existing theme code and do not form a complete runnable Shopify theme.
 ---
 
 ## What This Project Demonstrates
